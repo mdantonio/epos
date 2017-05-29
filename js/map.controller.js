@@ -8,6 +8,9 @@ function MapController($scope, $rootScope, $log, $timeout, leafletMapEvents, lea
 {
 	var self = this;
 
+    // Docs:
+    // http://angular-ui.github.io/ui-leaflet/#!/examples/events
+
     // Problem: tiles aren't loaded until window is resized/refreshed
     // Also reported here: https://github.com/tombatossals/angular-leaflet-directive/issues/49
     // Solution: force an invalidateSize after the page loading
