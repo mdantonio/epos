@@ -4,9 +4,19 @@
 var app = angular.module('web').controller('MapController', MapController);
 
 // The controller
-function MapController($scope, $rootScope, $log, leafletMapEvents, leafletData)
+function MapController($scope, $rootScope, $log, $timeout, leafletMapEvents, leafletData)
 {
 	var self = this;
+
+    // Problem: tiles aren't loaded until window is resized/refreshed
+    // Also reported here: https://github.com/tombatossals/angular-leaflet-directive/issues/49
+    // Solution: force an invalidateSize after the page loading
+    leafletData.getMap("mymap").then(function(map) {
+      $timeout(function() {
+        console.log("Map tiles refreshed");
+        map.invalidateSize();
+      }, 1000);
+    });
 
     angular.extend($scope, {
         defaults: {
